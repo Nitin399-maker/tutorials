@@ -16,9 +16,9 @@ You don't need admin access or OpenAI API keys.
 ### Option A — Install via official installer (easiest)
 
 1. Open the Node.js download page: https://nodejs.org/
-2. Download **LTS** (click on Get Nodejs)![](../codexcli\Gemini_Generated_Image_o00hyvo00hyvo00h.png)
+2. Download **LTS** (click on Get Nodejs)![](getnode.webp)
 
-3. Download and Run the **.msi** installer → keep defaults (make sure it includes **npm**)![](../codexcli\Gemini_Generated_Image_uoa98xuoa98xuoa9.png).
+3. Download and Run the **.msi** installer → keep defaults (make sure it includes **npm**)![](msi.webp)
 4. Restart your terminal (**Command Prompt** / **PowerShell**).
 
     ### Verify Installation
@@ -60,7 +60,7 @@ Then open any folder in VS Code.
 ## 2. Install Codex CLI
 
 Open Vs code and click on the three dots and follow this path Three dots -> Terminal -> New Terminal
-![](../codexcli\Gemini_Generated_Image_vgh5pgvgh5pgvgh5.png)
+![](dots.webp)
 
 Install globally:(Enter Below command in the Terminal and Hit Enter)
 
@@ -175,15 +175,6 @@ base_url = "https://openrouter.ai/api/v1"
 env_key = "OPENROUTER_API_KEY"
 wire_api = "chat"
 
-[profiles.public_gemini]
-model_provider = "public_gemini"
-model = "gemini-2.5-flash"  # or any Gemini model you have access to
-
-[model_providers.public_gemini]
-name = "Gemini (Public) - OpenAI compatible"
-base_url = "https://generativelanguage.googleapis.com/v1beta/openai"
-env_key = "GEMINI_API_KEY"
-wire_api = "chat"
 
 ```
 
