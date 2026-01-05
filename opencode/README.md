@@ -3,43 +3,7 @@
 This guide helps you set up **OpenCode** to work across:
 
 - **LLM Foundry APIs** (Straive router): OpenAI, Azure OpenAI, Gemini, OpenRouter
-- **Public APIs**: OpenAI, Anthropic, OpenRouter, Kimi (Moonshot)
-
-It is written in the same “install → configure → verify” style needed for Anand’s compatibility matrix.
-
----
-
-## 1. Install prerequisites
-
-### Option A — Install via official installer (easiest)
-
-1. Open the Node.js download page: https://nodejs.org/
-2. Download **LTS** (click on Get Nodejs)![](getnode.webp)
-
-3. Download and Run the **.msi** installer → keep defaults (make sure it includes **npm**)![](msi.webp)
-4. Restart your terminal (**Command Prompt** / **PowerShell**).
-
-    ### Verify Installation
-
-    ```bash 
-    node -v
-    npm -v
-    ```
-### Option B (recommended): Use WSL (Ubuntu)
-Codex CLI works best in a Linux-like shell.
-
-1. Install WSL + Ubuntu from Microsoft Store
-2. Open **Ubuntu** (WSL) and run:
-
-```bash
-sudo apt update
-sudo apt install -y nodejs npm
-node -v
-npm -v
-```
-
-> If your Ubuntu repo has an older Node.js, install a newer Node via NodeSource or nvm.
-
+- **Public APIs**: OpenAI, Anthropic, OpenRouter
 
 
 ---
@@ -54,17 +18,15 @@ Then open any folder in VS Code.
 
 ![](vscode-open-folder.webp)
 
+## 2. Install Codex
 
+Select the Extensions icon in the sidebar. Search for "Opencode" in the search bar and install it.
 
-## 1) Install OpenCode
+![](opencode.webp)
 
-### Install via npm (requires Node.js)
-```bash
-npm i -g opencode-ai
+After Installing it Press ctrl + shift + P then write (open opencode) and press Enter 
 
-```
-
----
+![](Capture.webp)
 
 ## 2) Where OpenCode stores config 
 
@@ -95,6 +57,8 @@ Do these 4 credentials:
 3) `foundry-gemini`  
 4) `foundry-azure`
 
+![](credentials.webp)
+
 ### 3.2 Add Public API credentials (repeat per provider)
 
 Run `opencode auth login` again and add:
@@ -102,12 +66,12 @@ Run `opencode auth login` again and add:
 - Provider: **OpenAI** (built-in) → paste your OpenAI key
 - Provider: **OpenRouter** (built-in) → paste your OpenRouter key
 - Provider: **Anthropic** (built-in) → paste your Anthropic key
-- Provider: **Moonshot AI** (if shown) → paste your Moonshot/Kimi key  
-  - If Moonshot is not shown, use provider **Other** and provider id `moonshot`.
+
+![](public.webp)
 
 ---
 
-## 4) Create global `opencode.json` (LLM Foundry endpoints + Kimi)
+## 4) Create global `opencode.json` (LLM Foundry endpoints)
 
 Create the folder (if needed) and open the file:
 
@@ -187,7 +151,6 @@ Paste the following **complete** config and save:
 
 Notes:
 - The 4 `foundry-*` providers are **OpenAI-compatible** endpoints behind LLM Foundry.
-- The `moonshot` provider points to Kimi’s public endpoint (Moonshot).
 
 ---
 
@@ -197,15 +160,17 @@ Close and reopen your terminal (important after config/credential changes).
 
 ---
 
-## 6) Verify (Anand “Hi” smoke test)
+## 6) Verify (smoke test)
 
-Run these one by one:
+Select models by Entering /models in the Opencoden and start using it.
+![](models.webp)
+
+OR Run these one by one:
 
 ```powershell
 opencode run -m foundry-openai/gpt-5.2 "Hi"
 opencode run -m foundry-openrouter/openai/gpt-5-codex "Hi"
 opencode run -m foundry-gemini/gemini-2.5-flash "Hi"
-opencode run -m moonshot/kimi-k2-thinking "Hi"
 ```
 
 ---
