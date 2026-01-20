@@ -104,25 +104,15 @@ notepad $env:USERPROFILE\.codex\config.toml
 Paste the following into `config.toml` and save:
 
 ```toml
-# ===== Default profile (switch per test using: codex -p <profile>) =====
-profile = "llmfoundry_openai"
-
-# ----------------------------
-# LLM Foundry (Straive router)
-# ----------------------------
-[profiles.llmfoundry_openai]
-model_provider = "llmfoundry_openai"
-model = "gpt-5.2"  # change if your Foundry catalog differs
-
-[model_providers.llmfoundry_openai]
-name = "LLM Foundry - OpenAI"
-base_url = "https://llmfoundry.straive.com/openai/v1"
-env_key = "LLMFOUNDRY_TOKEN"
-wire_api = "responses"
+profile = "llmfoundry_openrouter"
+# Alternate profiles:
+# profile = "llmfoundry_gemini"
+# profile = "llmfoundry_openai"
+# profile = "llmfoundry_openrouter"
 
 [profiles.llmfoundry_azure]
 model_provider = "llmfoundry_azure"
-# IMPORTANT: Azure typically wants the *deployment name* here
+# NOTE: Azure typically wants the *deployment name* here
 model = "gpt-5"
 
 [model_providers.llmfoundry_azure]
@@ -142,40 +132,61 @@ base_url = "https://llmfoundry.straive.com/gemini/v1beta/openai"
 env_key = "LLMFOUNDRY_TOKEN"
 wire_api = "chat"
 
+[profiles.llmfoundry_openai]
+model_provider = "llmfoundry_openai"
+model = "gpt-5.2"
+model_reasoning_effort = "medium"
+wire_api = "responses"
+
+[model_providers.llmfoundry_openai]
+name = "LLM Foundry - OpenAI"
+base_url = "https://llmfoundry.straive.com/openai/v1"
+env_key = "LLMFOUNDRY_TOKEN"
+wire_api = "responses"
+
 [profiles.llmfoundry_openrouter]
 model_provider = "llmfoundry_openrouter"
 model = "openai/gpt-5-codex"
 
 [model_providers.llmfoundry_openrouter]
-name = "LLM Foundry - OpenRouter"
+name = "LLM Foundry - Gemini"
 base_url = "https://llmfoundry.straive.com/openrouter/v1"
 env_key = "LLMFOUNDRY_TOKEN"
 wire_api = "chat"
 
-# ----------------------------
-# Public APIs (direct)
-# ----------------------------
-[profiles.public_openai]
-model_provider = "public_openai"
-model = "gpt-5.2" # use what your OpenAI account has access to
+[profiles.openai]
+model_provider = "openai"
+model = "gpt-5.2-codex"
+ # use what your OpenAI account has access to
 
-[model_providers.public_openai]
+[model_providers.openai]
 name = "OpenAI (Public)"
 base_url = "https://api.openai.com/v1"
-env_key = "OPENAI_API_KEY_PUBLIC"
+env_key = "OPENAI_API_KEY_PUBLIC" # Set this environment variable to your OpenAI API key
 wire_api = "responses"
 
-[profiles.public_openrouter]
-model_provider = "public_openrouter"
-model = "openai/gpt-4o" # example; pick any OpenRouter model id
+[profiles.openrouter]
+model_provider = "openrouter"
+model = "gpt-5" # example; pick any OpenRouter model id
 
-[model_providers.public_openrouter]
+[model_providers.openrouter]
 name = "OpenRouter (Public)"
 base_url = "https://openrouter.ai/api/v1"
-env_key = "OPENROUTER_API_KEY"
+env_key = "OPENROUTER_API_KEY" # Set this environment variable to your OpenRouter API key
+wire_api = "responses"
+
+
+
+[profiles.anthropic]
+model_provider = "anthropic"
+model = "claude-sonnet-4-5"
+
+[model_providers.anthropic]
+name = "Anthropic (Claude) - OpenAI compatible"
+base_url = "https://api.anthropic.com/v1/"
+env_key = "ANTHROPIC_API_KEY"
 wire_api = "chat"
-
-
+query_params = {}
 ```
 
 > Any changes to `config.toml` require restarting your terminal session (and sometimes restarting VS Code if you’re using its terminal).
@@ -248,8 +259,11 @@ codex -p llmfoundry_openrouter "Hi"
 
 ### Public API profiles
 ```bash
-codex -p public_openai "Hi"
-codex -p public_openrouter "Hi"
+codex -p openai "Hi"
+codex -p openrouter -c features.shell_tool=false "Hi"
+codex -p anthropic "Hi"
+
+
 ```
 
 If you get a response like “Hi, how can I help?”, the end-to-end test passed.
